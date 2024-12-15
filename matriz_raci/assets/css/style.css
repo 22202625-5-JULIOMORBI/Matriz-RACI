@@ -1,0 +1,191 @@
+
+        /* Estilos globais */
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        /* Estilos do contêiner da tabela */
+        .container {
+            width: 100%;
+            max-width: 100%;
+            background-color: white;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+            border-radius: 15px;
+            padding: 10px;
+            overflow-x: auto;
+            position: relative;
+            margin-top: 20px; /* Espaço entre o topo da página e a tabela */
+        }
+
+        /* Estilos da tabela RACI */
+        .raci-table {
+            border-collapse: collapse;
+            width: 100%;
+            min-width: 600px;
+        }
+
+        /* Estilos das células e cabeçalhos da tabela */
+        .raci-table th, .raci-table td {
+            border: 1px solid #dddddd;
+            text-align: center;
+            padding: 10px;
+            font-family: Arial, sans-serif;
+        }
+
+        /* Estilos específicos para cabeçalhos */
+        .raci-table th {
+            font-weight: bold;
+            white-space: nowrap;
+            line-height: 1;
+            text-align: center;
+            vertical-align: middle;
+        }
+
+        /* Estilos para o título "MATRIZ RCI" */
+        .header-matriz {
+            font-weight: bold;
+            background-color: #ffffff;
+            color: rgb(0, 0, 0);
+            font-size: 30px;
+            padding: 25px 0; /* Espaçamento maior para o título */
+        }
+
+        /* Estilos para o título "MATRIZ RCI" */
+        .header-logo {
+            background-color: #E94B35;
+            color: white;
+            font-size: 24px;
+            padding: 15px 0; /* Espaçamento maior para o título */
+        }
+
+        /* Estilos para cabeçalhos vermelhos */
+        .header-red {
+            background-color: #2A2E5B;
+            color: white;
+            font-size: 18px;
+        }
+
+        /* Estilos padrão das células da tabela */
+        .raci-table td {
+            background-color: white;
+            color: black;
+            font-weight: bold;
+            padding: 10px;
+        }
+
+        /* Estilos para textareas em negrito */
+        .bold-black textarea {
+            width: 100%;
+            background-color: transparent;
+            border: none;
+            color: black;
+            font-weight: bold;
+            text-align: center;
+            font-family: Arial, sans-serif;
+            resize: none;
+            overflow: hidden;
+        }
+
+        /* Estilos para o contêiner de botões flutuantes */
+        .btn-container {
+            position: fixed;
+            top: 30px;
+            right: 20px;
+            display: flex;
+            flex-direction: row;
+            align-items: flex-end;
+            z-index: 1000;
+        }
+
+        /* Estilos para botões flutuantes */
+        .btn-container button {
+            background-color: transparent;
+            border: none;
+            cursor: pointer;
+            margin-top: 10px;
+            font-size: 24px;
+            color: #2A2E5B;
+            padding: 5px;
+            border-radius: 50%;
+            transition: background-color 0.3s ease;
+        }
+
+        /* Efeito hover para botões flutuantes */
+        .btn-container button:hover {
+            background-color: #f0f0f0;
+        }
+
+        /* Estilos para impressão */
+        @media print {
+            body {
+                background-color: white;
+            }
+            .container {
+                box-shadow: none;
+                border-radius: 0;
+                padding: 0;
+                overflow-x: initial;
+                width: auto;
+                margin: 0;
+            }
+            .raci-table th, .raci-table td {
+                padding: 20px;
+                page-break-inside: auto;
+                -webkit-print-color-adjust: exact;
+                print-color-adjust: exact;
+            }
+            .raci-table th.header-logo, .raci-table th.header-red {
+                color: white !important;
+            }
+            .raci-table th.header-logo {
+                background-color: #E94B35 !important;
+            }
+            .raci-table th.header-red {
+                background-color: #2A2E5B !important;
+            }
+            .btn-container {
+                display: none;
+            }
+            .raci-table th::after {
+                content: attr(data-title);
+                display: block;
+                color: white;
+                font-weight: normal;
+                font-size: 12px;
+                margin-top: 5px;
+            }
+        }
+
+        /* Estilos para tooltips nos cabeçalhos da tabela */
+        .raci-table th[data-title] {
+            position: relative;
+            cursor: help; /* Altera o cursor para indicar que o tooltip é clicável */
+        }
+
+        .raci-table th[data-title]::before {
+            content: attr(data-title);
+            position: absolute;
+            background-color: #2A2E5B;
+            color: white;
+            padding: 5px 10px;
+            border-radius: 5px;
+            font-size: 14px;
+            white-space: nowrap;
+            z-index: 999;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            pointer-events: none; /* Evita que o tooltip interfira com os cliques */
+            bottom: -30px; /* Ajusta a posição abaixo do th */
+            left: 50%; /* Centraliza horizontalmente */
+            transform: translateX(-50%); /* Centraliza horizontalmente */
+        }
+
+        .raci-table th[data-title]:hover::before {
+            opacity: 1;
+        }
