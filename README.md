@@ -38,9 +38,6 @@ jsPDF: Exportação para PDF.
 Tela Inicial
 <img src="https://via.placeholder.com/800x400.png?text=Tela+Inicial+do+Projeto" alt="Tela Inicial" width="100%">
 
-Popover de Exportação
-<img src="https://via.placeholder.com/800x400.png?text=Popover+de+Exporta%C3%A7%C3%A3o" alt="Popover de Exportação" width="100%">
-
 📂 Estrutura do Projeto
 
 ├── index.html       # Página principal
@@ -78,11 +75,15 @@ npm install
 2. Instale as dependências:
 
 npm install xlsx jspdf jspdf-autotable
+
 3. Inclua as bibliotecas no projeto:
 
 <script src="node_modules/xlsx/dist/xlsx.full.min.js"></script>
+
 <script src="node_modules/jspdf/dist/jspdf.umd.min.js"></script>
+
 <script src="node_modules/jspdf-autotable/dist/jspdf.plugin.autotable.min.js"></script>
+
 
 🖋️ Contribuição
 Contribuições são bem-vindas! Para contribuir:

@@ -14,51 +14,41 @@
         <table class="raci-table" id="raciTable">
             <thead>
                 <tr>
-                    <th class="header-matriz" id="tableTitle" colspan="4" contenteditable="false">Matriz Papeis e Responsabilidades</th>
+                    <th class="header-matriz" id="tableTitle" colspan="4" contenteditable="false">Matriz Papéis e Responsabilidades</th>
                 </tr>
                 <tr>
                     <th class="header-logo" id="tableTitle" colspan="4" contenteditable="true">Insira o Nome do Projeto</th>
                 </tr>
                 <tr class="header-red">
-                    <th data-title="Descrição das Atividades"><i class="fa-solid fa-list-check"></i> Atividade</th>
-                    <th data-title="Pessoas responsáveis pelas atividades"><i class="fa-solid fa-user-check"></i> Responsável</th>
-                    <th data-title="Pessoas a serem consultadas para as atividades"><i class="fa-solid fa-comments"></i> Consultado</th>
-                    <th data-title="Pessoas a serem informadas sobre as atividades"><i class="fa-solid fa-circle-info"></i> Informado</th>
-                </tr>                
+                    <th>Atividade</th>
+                    <th>Responsável</th>
+                    <th>Consultado</th>
+                    <th>Informado</th>
+                </tr>
             </thead>
             <tbody>
-                <!-- Linhas da tabela -->
                 <tr>
-                    <td class="bold-black"><textarea oninput="adjustTextareaHeight(this)">Atividade 1</textarea></td>
-                    <td class="bold-black"><textarea oninput="adjustTextareaHeight(this)">*</textarea></td>
-                    <td class="bold-black"><textarea oninput="adjustTextareaHeight(this)">*</textarea></td>
-                    <td class="bold-black"><textarea oninput="adjustTextareaHeight(this)">*</textarea></td>
-                </tr>
-                <tr>
-                    <td class="bold-black"><textarea oninput="adjustTextareaHeight(this)">Atividade 2</textarea></td>
-                    <td class="bold-black"><textarea oninput="adjustTextareaHeight(this)">*</textarea></td>
-                    <td class="bold-black"><textarea oninput="adjustTextareaHeight(this)">*</textarea></td>
-                    <td class="bold-black"><textarea oninput="adjustTextareaHeight(this)">*</textarea></td>
-                </tr>
-                <tr>
-                    <td class="bold-black"><textarea oninput="adjustTextareaHeight(this)">Atividade 3</textarea></td>
-                    <td class="bold-black"><textarea oninput="adjustTextareaHeight(this)">*</textarea></td>
-                    <td class="bold-black"><textarea oninput="adjustTextareaHeight(this)">*</textarea></td>
-                    <td class="bold-black"><textarea oninput="adjustTextareaHeight(this)">*</textarea></td>
+                    <td class="bold-black"><textarea>Atividade 1</textarea></td>
+                    <td class="bold-black"><textarea>*</textarea></td>
+                    <td class="bold-black"><textarea>*</textarea></td>
+                    <td class="bold-black"><textarea>*</textarea></td>
                 </tr>
             </tbody>
         </table>
     </div>
 
-    <!-- Contêiner de botões flutuantes -->
+    <!-- Botões flutuantes -->
     <div class="btn-container">
         <button onclick="addRow()" title="Adicionar Linha"><i class="fas fa-plus-circle"></i></button>
         <button onclick="removeRow()" title="Remover Linha"><i class="fas fa-minus-circle"></i></button>
-        <button onclick="saveChanges()" title="Salvar"><i class="fas fa-save"></i></button>
+        <button onclick="exportCSV()" title="Exportar CSV"><i class="fas fa-file-csv"></i></button>
+        <button onclick="exportPDF()" title="Exportar PDF"><i class="fas fa-file-pdf"></i></button>
         <button onclick="saveAndPrint()" title="Imprimir"><i class="fas fa-print"></i></button>
     </div>
 
-    <!-- JavaScript para funcionalidades da tabela -->
+    <!-- JavaScript -->
     <script src="assets/js/script.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.4.0/jspdf.umd.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.23/jspdf.plugin.autotable.min.js"></script>
 </body>
 </html>

@@ -1,80 +1,91 @@
+// Ajusta a altura do textarea dinamicamente
+function adjustTextareaHeight(textarea) {
+    textarea.style.height = 'auto';
+    textarea.style.height = (textarea.scrollHeight) + 'px';
+}
 
-        // Ajusta a altura do textarea dinamicamente
-        function adjustTextareaHeight(textarea) {
-            textarea.style.height = 'auto';
-            textarea.style.height = (textarea.scrollHeight) + 'px';
+// Adiciona uma nova linha à tabela
+function addRow() {
+    const table = document.getElementById('raciTable').getElementsByTagName('tbody')[0];
+    const rowCount = table.rows.length;
+
+    // Verifica se há mais de 12 linhas
+    if (rowCount >= 12) {
+        if (!confirm("Você está adicionando mais de 12 atividades. Isso pode comprometer a qualidade da impressão. Deseja continuar?")) {
+            return;
         }
+    }
 
-        // Adiciona uma nova linha à tabela
-        function addRow() {
-            const table = document.getElementById('raciTable').getElementsByTagName('tbody')[0];
-            const rowCount = table.rows.length;
+    const newRow = table.insertRow();
+    const colCount = table.rows[0].cells.length;
 
-            // Verifica se já há 12 linhas (pois a 12ª será a próxima a ser adicionada)
-            if (rowCount === 12) {
-                // Mostra um alerta solicitando confirmação
-                if (confirm("Você está adicionando mais que 12 atividades. Isso compromete a qualidade da impressão. Deseja continuar?")) {
-                    insertNewRow(table);
-                }
-            } else {
-                // Se não atingiu o limite de 12 linhas, adiciona normalmente
-                insertNewRow(table);
-            }
-        }
+    for (let i = 0; i < colCount; i++) {
+        const newCell = newRow.insertCell(i);
+        newCell.innerHTML = `<textarea oninput="adjustTextareaHeight(this)">Nova Atividade</textarea>`;
+        newCell.classList.add('bold-black');
+    }
+}
 
-        // Função auxiliar para inserir uma nova linha na tabela
-        function insertNewRow(table) {
-            const newRow = table.insertRow();
-            const colCount = table.rows[0].cells.length;
+// Remove a última linha da tabela
+function removeRow() {
+    const table = document.getElementById('raciTable').getElementsByTagName('tbody')[0];
+    if (table.rows.length > 1) {
+        table.deleteRow(table.rows.length - 1);
+    } else {
+        alert("A tabela deve ter ao menos uma linha.");
+    }
+}
 
-            for (let i = 0; i < colCount; i++) {
-                const newCell = newRow.insertCell(i);
-                if (i === 0) {
-                    newCell.innerHTML = '<textarea oninput="adjustTextareaHeight(this)">Nova Atividade</textarea>';
-                } else {
-                    newCell.innerHTML = '<textarea oninput="adjustTextareaHeight(this)">*</textarea>';
-                }
-                newCell.classList.add('bold-black');
-            }
-        }
+// Exporta a tabela como CSV
+function exportCSV() {
+    const table = document.getElementById('raciTable');
+    let csvContent = "";
 
-        // Remove a última linha da tabela (exceto se houver apenas uma linha)
-        function removeRow() {
-            const table = document.getElementById('raciTable').getElementsByTagName('tbody')[0];
-            const rowCount = table.rows.length;
-            if (rowCount > 1) {
-                table.deleteRow(rowCount - 1);
-            } else {
-                alert("A tabela deve ter ao menos uma atividade.");
-            }
-        }
+    // Cabeçalhos
+    const headers = Array.from(table.querySelectorAll("thead th:not([colspan])")).map(header => header.innerText.trim());
+    csvContent += headers.join(",") + "\n";
 
-        // Salva as alterações feitas na tabela
-        function saveChanges() {
-            // Atualiza o conteúdo dos textareas na tabela original
-            const textareas = document.querySelectorAll('.raci-table tbody .bold-black textarea');
-            textareas.forEach(textarea => {
-                textarea.textContent = textarea.value; // Atualiza o conteúdo para corresponder à entrada do usuário
-            });
+    // Corpo
+    const rows = table.querySelectorAll("tbody tr");
+    rows.forEach(row => {
+        const cells = Array.from(row.cells).map(cell => `"${cell.querySelector("textarea").value.trim()}"`);
+        csvContent += cells.join(",") + "\n";
+    });
 
-            // Clona o conteúdo HTML original incluindo estilos e scripts
-            const clonedHtml = document.documentElement.cloneNode(true);
+    // Download do CSV
+    const blob = new Blob([csvContent], { type: "text/csv;charset=utf-8;" });
+    const a = document.createElement("a");
+    a.href = URL.createObjectURL(blob);
+    a.download = "matriz_rci.csv";
+    a.click();
+}
 
-            // Cria um Blob a partir do conteúdo clonado
-            const blob = new Blob([clonedHtml.outerHTML], { type: 'text/html' });
+// Exporta a tabela como PDF
+function exportPDF() {
+    const table = document.getElementById('raciTable');
+    const doc = new jsPDF();
 
-            // Cria um URL temporário e link de download
-            const url = URL.createObjectURL(blob);
-            const a = document.createElement('a');
-            a.href = url;
-            a.download = 'matriz_rci.html';
-            document.body.appendChild(a);
-            a.click();
-            document.body.removeChild(a);
-            URL.revokeObjectURL(url);
-        }
+    // Configuração para AutoTable
+    const rows = [];
+    const headers = Array.from(table.querySelectorAll("thead th:not([colspan])")).map(header => header.innerText.trim());
 
-        // Função para imprimir a página atual
-        function saveAndPrint() {
-            window.print();
-        }
+    table.querySelectorAll("tbody tr").forEach(row => {
+        const rowData = Array.from(row.cells).map(cell => cell.querySelector("textarea").value.trim());
+        rows.push(rowData);
+    });
+
+    // Geração do PDF com AutoTable
+    doc.autoTable({
+        head: [headers],
+        body: rows,
+        theme: 'grid',
+        styles: { fontSize: 10 },
+    });
+
+    doc.save('matriz_rci.pdf');
+}
+
+// Imprime a página
+function saveAndPrint() {
+    window.print();
+}
