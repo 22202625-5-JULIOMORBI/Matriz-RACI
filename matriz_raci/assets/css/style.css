@@ -1,191 +1,208 @@
+/* Estilos globais */
+body {
+    font-family: 'Poppins', sans-serif;
+    background-color: #f9f9f9;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    color: #333;
+}
 
-        /* Estilos globais */
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #f4f4f4;
-            margin: 0;
-            padding: 0;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-        }
+/* Estilo do contêiner principal */
+.container {
+    width: 90%;
+    max-width: 1200px;
+    background-color: #ffffff;
+    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1);
+    border-radius: 15px;
+    overflow: hidden;
+    margin-top: 30px;
+    animation: fadeIn 0.5s ease-in-out;
+}
 
-        /* Estilos do contêiner da tabela */
-        .container {
-            width: 100%;
-            max-width: 100%;
-            background-color: white;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
-            border-radius: 15px;
-            padding: 10px;
-            overflow-x: auto;
-            position: relative;
-            margin-top: 20px; /* Espaço entre o topo da página e a tabela */
-        }
+/* Animação para fade-in */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
 
-        /* Estilos da tabela RACI */
-        .raci-table {
-            border-collapse: collapse;
-            width: 100%;
-            min-width: 600px;
-        }
+/* Estilo da tabela */
+.raci-table {
+    border-collapse: collapse;
+    width: 100%;
+    font-size: 1rem;
+}
 
-        /* Estilos das células e cabeçalhos da tabela */
-        .raci-table th, .raci-table td {
-            border: 1px solid #dddddd;
-            text-align: center;
-            padding: 10px;
-            font-family: Arial, sans-serif;
-        }
+/* Cabeçalhos da tabela */
+.raci-table th {
+    background: linear-gradient(135deg, #2A2E5B, #1D1F3F);
+    color: #ffffff;
+    padding: 15px 10px;
+    text-align: center;
+    font-weight: bold;
+    text-transform: uppercase;
+    font-size: 1.1rem;
+    position: relative;
+    overflow: hidden;
+}
 
-        /* Estilos específicos para cabeçalhos */
-        .raci-table th {
-            font-weight: bold;
-            white-space: nowrap;
-            line-height: 1;
-            text-align: center;
-            vertical-align: middle;
-        }
+.raci-table th::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(255, 255, 255, 0.1);
+    transform: translateX(-100%);
+    transition: transform 0.3s ease;
+    z-index: 1;
+}
 
-        /* Estilos para o título "MATRIZ RCI" */
-        .header-matriz {
-            font-weight: bold;
-            background-color: #ffffff;
-            color: rgb(0, 0, 0);
-            font-size: 30px;
-            padding: 25px 0; /* Espaçamento maior para o título */
-        }
+.raci-table th:hover::after {
+    transform: translateX(0);
+}
 
-        /* Estilos para o título "MATRIZ RCI" */
-        .header-logo {
-            background-color: #E94B35;
-            color: white;
-            font-size: 24px;
-            padding: 15px 0; /* Espaçamento maior para o título */
-        }
+/* Linhas da tabela */
+.raci-table td {
+    background-color: #f4f6fc;
+    color: #333;
+    text-align: center;
+    padding: 15px 10px;
+    font-weight: 500;
+    border: 1px solid #ddd;
+    transition: background-color 0.3s ease;
+}
 
-        /* Estilos para cabeçalhos vermelhos */
-        .header-red {
-            background-color: #2A2E5B;
-            color: white;
-            font-size: 18px;
-        }
+/* Efeito de hover nas células */
+.raci-table td:hover {
+    background-color: #eef3fd;
+}
 
-        /* Estilos padrão das células da tabela */
-        .raci-table td {
-            background-color: white;
-            color: black;
-            font-weight: bold;
-            padding: 10px;
-        }
+/* Estilo dos textareas */
+.bold-black textarea {
+    width: 100%;
+    background-color: transparent;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 10px;
+    color: #333;
+    font-weight: bold;
+    text-align: center;
+    font-family: 'Poppins', sans-serif;
+    resize: none;
+    overflow: hidden;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
 
-        /* Estilos para textareas em negrito */
-        .bold-black textarea {
-            width: 100%;
-            background-color: transparent;
-            border: none;
-            color: black;
-            font-weight: bold;
-            text-align: center;
-            font-family: Arial, sans-serif;
-            resize: none;
-            overflow: hidden;
-        }
+.bold-black textarea:focus {
+    border-color: #2A2E5B;
+    box-shadow: 0 0 10px rgba(42, 46, 91, 0.2);
+}
 
-        /* Estilos para o contêiner de botões flutuantes */
-        .btn-container {
-            position: fixed;
-            top: 30px;
-            right: 20px;
-            display: flex;
-            flex-direction: row;
-            align-items: flex-end;
-            z-index: 1000;
-        }
+/* Botões flutuantes */
+.btn-container {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    z-index: 1000;
+    animation: slideIn 0.5s ease-out;
+}
 
-        /* Estilos para botões flutuantes */
-        .btn-container button {
-            background-color: transparent;
-            border: none;
-            cursor: pointer;
-            margin-top: 10px;
-            font-size: 24px;
-            color: #2A2E5B;
-            padding: 5px;
-            border-radius: 50%;
-            transition: background-color 0.3s ease;
-        }
+@keyframes slideIn {
+    from {
+        opacity: 0;
+        transform: translateX(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
 
-        /* Efeito hover para botões flutuantes */
-        .btn-container button:hover {
-            background-color: #f0f0f0;
-        }
+.btn-container button {
+    background-color: #2A2E5B;
+    color: #ffffff;
+    border: none;
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.2rem;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
 
-        /* Estilos para impressão */
-        @media print {
-            body {
-                background-color: white;
-            }
-            .container {
-                box-shadow: none;
-                border-radius: 0;
-                padding: 0;
-                overflow-x: initial;
-                width: auto;
-                margin: 0;
-            }
-            .raci-table th, .raci-table td {
-                padding: 20px;
-                page-break-inside: auto;
-                -webkit-print-color-adjust: exact;
-                print-color-adjust: exact;
-            }
-            .raci-table th.header-logo, .raci-table th.header-red {
-                color: white !important;
-            }
-            .raci-table th.header-logo {
-                background-color: #E94B35 !important;
-            }
-            .raci-table th.header-red {
-                background-color: #2A2E5B !important;
-            }
-            .btn-container {
-                display: none;
-            }
-            .raci-table th::after {
-                content: attr(data-title);
-                display: block;
-                color: white;
-                font-weight: normal;
-                font-size: 12px;
-                margin-top: 5px;
-            }
-        }
+.btn-container button:hover {
+    background-color: #1D1F3F;
+    transform: scale(1.1);
+}
 
-        /* Estilos para tooltips nos cabeçalhos da tabela */
-        .raci-table th[data-title] {
-            position: relative;
-            cursor: help; /* Altera o cursor para indicar que o tooltip é clicável */
-        }
+.btn-container button:active {
+    transform: scale(0.95);
+}
 
-        .raci-table th[data-title]::before {
-            content: attr(data-title);
-            position: absolute;
-            background-color: #2A2E5B;
-            color: white;
-            padding: 5px 10px;
-            border-radius: 5px;
-            font-size: 14px;
-            white-space: nowrap;
-            z-index: 999;
-            opacity: 0;
-            transition: opacity 0.3s ease;
-            pointer-events: none; /* Evita que o tooltip interfira com os cliques */
-            bottom: -30px; /* Ajusta a posição abaixo do th */
-            left: 50%; /* Centraliza horizontalmente */
-            transform: translateX(-50%); /* Centraliza horizontalmente */
-        }
+/* Efeito ao passar o cursor nos ícones */
+.btn-container button i {
+    transition: transform 0.2s ease;
+}
 
-        .raci-table th[data-title]:hover::before {
-            opacity: 1;
-        }
+.btn-container button:hover i {
+    transform: rotate(15deg);
+}
+
+/* Estilo responsivo */
+@media (max-width: 768px) {
+    .raci-table th, .raci-table td {
+        font-size: 0.9rem;
+        padding: 10px 5px;
+    }
+
+    .btn-container button {
+        width: 40px;
+        height: 40px;
+        font-size: 1rem;
+    }
+}
+
+/* Estilos para impressão */
+@media print {
+    body {
+        background-color: white;
+    }
+    .container {
+        box-shadow: none;
+        border-radius: 0;
+        margin: 0;
+        width: 100%;
+    }
+    .btn-container {
+        display: none;
+    }
+    .raci-table th {
+        background-color: #2A2E5B !important;
+        color: white !important;
+        -webkit-print-color-adjust: exact;
+        print-color-adjust: exact;
+    }
+    .raci-table td {
+        background-color: white;
+        color: black;
+        border-color: #ddd;
+        -webkit-print-color-adjust: exact;
+        print-color-adjust: exact;
+    }
+}
